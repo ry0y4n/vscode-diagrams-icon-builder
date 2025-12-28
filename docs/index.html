@@ -194,6 +194,201 @@
       padding: 2rem;
       color: var(--text-muted);
     }
+    
+    /* Converter Section */
+    .converter-section {
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    
+    .converter-section h2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .converter-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 1rem;
+    }
+    
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(88, 166, 255, 0.1);
+    }
+    
+    .drop-zone-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .drop-zone-text {
+      color: var(--text-muted);
+    }
+    
+    .drop-zone-text strong {
+      color: var(--accent);
+    }
+    
+    .file-input {
+      display: none;
+    }
+    
+    .converter-options {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .converter-options label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    .converter-options input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem;
+      color: var(--text);
+      margin-left: 0.5rem;
+      width: 200px;
+    }
+    
+    .file-list {
+      margin: 1rem 0;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      background: var(--bg);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .file-item-name {
+      flex: 1;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    
+    .file-item-remove {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+    }
+    
+    .file-item-remove:hover {
+      color: #f85149;
+    }
+    
+    .converter-results {
+      display: none;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .converter-results.visible {
+      display: block;
+    }
+    
+    .result-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    
+    .result-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+    }
+    
+    .result-btn:hover {
+      opacity: 0.9;
+    }
+    
+    .result-btn.secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+    
+    .result-btn.copied {
+      background: var(--success);
+    }
+    
+    .result-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      max-height: 200px;
+      overflow: auto;
+    }
+    
+    .result-preview pre {
+      margin: 0;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    
+    .icons-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .icon-preview-item {
+      width: 48px;
+      height: 48px;
+      padding: 4px;
+      background: white;
+      border-radius: 4px;
+      cursor: help;
+    }
+    
+    .icon-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
@@ -202,6 +397,58 @@
       <h1>📐 Diagrams.net Icon Libraries</h1>
       <p class="subtitle">最新のクラウドアイコンを Draw.io Integration で使う</p>
     </header>
+    
+    <!-- SVG Converter Section -->
+    <div class="converter-section">
+      <h2>🔧 カスタム SVG コンバーター</h2>
+      <p class="converter-description">
+        独自のSVGアイコンをDraw.io用ライブラリに変換します。<br>
+        生成したXMLを自分のリポジトリにホスティングし、raw URLを使用してください。
+      </p>
+      
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-icon">📁</div>
+        <p class="drop-zone-text">
+          <strong>SVGファイルをドロップ</strong><br>
+          またはクリックして選択（複数可）
+        </p>
+        <input type="file" class="file-input" id="fileInput" accept=".svg" multiple>
+      </div>
+      
+      <div class="converter-options">
+        <label>
+          ライブラリ名:
+          <input type="text" id="libraryName" placeholder="My Custom Icons" value="My Custom Icons">
+        </label>
+      </div>
+      
+      <div class="file-list" id="fileList"></div>
+      
+      <div class="converter-results" id="converterResults">
+        <h3 style="margin-bottom: 1rem;">✨ 変換完了! (<span id="iconCount">0</span> アイコン)</h3>
+        
+        <div class="icons-preview" id="iconsPreview"></div>
+        
+        <div class="result-buttons" style="margin-top: 1rem;">
+          <button class="result-btn" onclick="downloadXml()">
+            📥 XMLダウンロード
+          </button>
+          <button class="result-btn secondary" onclick="clearFiles()">
+            🗑️ クリア
+          </button>
+        </div>
+        
+        <div class="usage-guide" style="margin-top: 1.5rem; padding: 1rem; background: var(--bg); border-radius: 4px; border: 1px solid var(--border);">
+          <h4 style="margin-bottom: 0.5rem;">📖 使い方</h4>
+          <ol style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+            <li>XMLをダウンロードして、GitHubリポジトリにアップロード</li>
+            <li>raw URLを取得（例: <code>https://raw.githubusercontent.com/ユーザー名/リポジトリ/main/ファイル名.xml</code>）</li>
+            <li>VS Code の settings.json に以下を追加:</li>
+          </ol>
+          <pre style="margin-top: 0.5rem; padding: 0.75rem; background: var(--card-bg); border-radius: 4px; font-size: 0.85rem; overflow-x: auto;"><code id="usageSnippet"></code></pre>
+        </div>
+      </div>
+    </div>
     
     <div id="libraries">
       <div class="loading">ライブラリ情報を読み込み中...</div>
@@ -345,7 +592,267 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderLibraries();
       document.getElementById('settings-snippet').textContent = generateSettingsSnippet();
+      initConverter();
+    });
+    
+    // ============================================
+    // SVG Converter Logic
+    // ============================================
+    
+    let uploadedFiles = [];
+    let convertedLibrary = null;
+    
+    function initConverter() {
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      
+      // Click to select
+      dropZone.addEventListener('click', () => fileInput.click());
+      
+      // File input change
+      fileInput.addEventListener('change', (e) => {
+        handleFiles(Array.from(e.target.files));
+      });
+      
+      // Drag and drop
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+      
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+      });
+      
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.svg'));
+        handleFiles(files);
+      });
+    }
+    
+    function handleFiles(files) {
+      for (const file of files) {
+        if (!uploadedFiles.find(f => f.name === file.name)) {
+          uploadedFiles.push(file);
+        }
+      }
+      renderFileList();
+      if (uploadedFiles.length > 0) {
+        convertFiles();
+      }
+    }
+    
+    function renderFileList() {
+      const container = document.getElementById('fileList');
+      if (uploadedFiles.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      
+      container.innerHTML = uploadedFiles.map((file, index) => `
+        <div class="file-item">
+          <span class="file-item-name">${file.name}</span>
+          <button class="file-item-remove" onclick="removeFile(${index})">✕</button>
+        </div>
+      `).join('');
+    }
+    
+    function removeFile(index) {
+      uploadedFiles.splice(index, 1);
+      renderFileList();
+      if (uploadedFiles.length > 0) {
+        convertFiles();
+      } else {
+        document.getElementById('converterResults').classList.remove('visible');
+      }
+    }
+    
+    async function convertFiles() {
+      const entries = [];
+      const previews = [];
+      
+      for (const file of uploadedFiles) {
+        try {
+          const svgContent = await file.text();
+          const entry = svgToLibraryEntry(svgContent, file.name);
+          entries.push(entry);
+          
+          // Create preview
+          const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+          previews.push(URL.createObjectURL(blob));
+        } catch (e) {
+          console.error(`Failed to convert ${file.name}:`, e);
+        }
+      }
+      
+      if (entries.length === 0) return;
+      
+      // Generate library XML
+      const libraryXml = createLibraryXml(entries);
+      convertedLibrary = {
+        xml: libraryXml,
+        entries: entries,
+        previews: previews
+      };
+      
+      // Show results
+      showResults();
+    }
+    
+    function svgToLibraryEntry(svgContent, filename) {
+      // Get dimensions from SVG
+      const dimensions = getSvgDimensions(svgContent);
+      let { width, height } = dimensions;
+      
+      // Scale down if too large
+      const maxSize = 80;
+      if (width > maxSize || height > maxSize) {
+        const scale = maxSize / Math.max(width, height);
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+      }
+      
+      // Create mxGraph XML
+      const mxGraphXml = createMxGraphXml(svgContent, width, height);
+      
+      // Compress and encode
+      const encoded = compressAndEncode(mxGraphXml);
+      
+      // Generate title from filename
+      const title = filename.replace('.svg', '')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+      
+      return {
+        xml: encoded,
+        w: width,
+        h: height,
+        title: title,
+        aspect: 'fixed'
+      };
+    }
+    
+    function getSvgDimensions(svgContent) {
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgContent, 'image/svg+xml');
+        const svg = doc.documentElement;
+        
+        let width = svg.getAttribute('width') || '48';
+        let height = svg.getAttribute('height') || '48';
+        
+        // Remove units
+        width = parseInt(width.replace(/[^0-9.]/g, '')) || 48;
+        height = parseInt(height.replace(/[^0-9.]/g, '')) || 48;
+        
+        return { width, height };
+      } catch {
+        return { width: 48, height: 48 };
+      }
+    }
+    
+    function createMxGraphXml(svgContent, width, height) {
+      // Base64 encode SVG
+      const svgBase64 = btoa(unescape(encodeURIComponent(svgContent)));
+      
+      // URL encode for draw.io format
+      const svgData = encodeURIComponent(svgBase64);
+      
+      return `<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,${svgData};" vertex="1" parent="1">
+      <mxGeometry width="${width}" height="${height}" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>`;
+    }
+    
+    function compressAndEncode(xmlContent) {
+      // Use pako for deflate compression (loaded from CDN)
+      const compressed = pako.deflateRaw(new TextEncoder().encode(xmlContent), { level: 9 });
+      
+      // Base64 encode
+      let binary = '';
+      for (let i = 0; i < compressed.length; i++) {
+        binary += String.fromCharCode(compressed[i]);
+      }
+      return btoa(binary);
+    }
+    
+    function createLibraryXml(entries) {
+      const json = JSON.stringify(entries);
+      return `<mxlibrary>${json}</mxlibrary>`;
+    }
+    
+    function showResults() {
+      const resultsDiv = document.getElementById('converterResults');
+      resultsDiv.classList.add('visible');
+      
+      // Update icon count
+      document.getElementById('iconCount').textContent = convertedLibrary.entries.length;
+      
+      // Show icon previews
+      const previewDiv = document.getElementById('iconsPreview');
+      previewDiv.innerHTML = convertedLibrary.previews.map((url, i) => 
+        `<div class="icon-preview-item" title="${convertedLibrary.entries[i].title}"><img src="${url}" alt="icon"></div>`
+      ).join('');
+      
+      // Update usage snippet
+      updateUsageSnippet();
+    }
+    
+    function updateUsageSnippet() {
+      const libraryName = document.getElementById('libraryName').value || 'My Custom Icons';
+      const snippet = `{
+  "hediet.vscode-drawio.customLibraries": [
+    {
+      "entryId": "${libraryName}",
+      "libName": "${libraryName}",
+      "url": "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/${libraryName.toLowerCase().replace(/\s+/g, '-')}.xml"
+    }
+  ]
+}`;
+      document.getElementById('usageSnippet').textContent = snippet;
+    }
+    
+    function clearFiles() {
+      uploadedFiles = [];
+      convertedLibrary = null;
+      renderFileList();
+      document.getElementById('converterResults').classList.remove('visible');
+      document.getElementById('fileInput').value = '';
+    }
+    
+    function downloadXml() {
+      if (!convertedLibrary) return;
+      
+      const libraryName = document.getElementById('libraryName').value || 'custom-library';
+      const filename = libraryName.toLowerCase().replace(/\s+/g, '-') + '.xml';
+      
+      const blob = new Blob([convertedLibrary.xml], { type: 'application/xml' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      
+      URL.revokeObjectURL(url);
+    }
+    
+    // Update snippet when library name changes
+    document.getElementById('libraryName')?.addEventListener('input', () => {
+      if (convertedLibrary) {
+        updateUsageSnippet();
+      }
     });
   </script>
+  
+  <!-- Pako library for deflate compression -->
+  <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
 </body>
 </html>
