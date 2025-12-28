@@ -1,0 +1,37 @@
+{
+  "azure": {
+    "name": "Azure Architecture Icons",
+    "categories": [
+      "output/azure/ai-and-machine-learning.xml",
+      "output/azure/analytics.xml",
+      "output/azure/app-services.xml",
+      "output/azure/azure-ecosystem.xml",
+      "output/azure/azure-stack.xml",
+      "output/azure/blockchain.xml",
+      "output/azure/compute.xml",
+      "output/azure/containers.xml",
+      "output/azure/databases.xml",
+      "output/azure/devops.xml",
+      "output/azure/general.xml",
+      "output/azure/hybrid-and-multicloud.xml",
+      "output/azure/identity.xml",
+      "output/azure/integration.xml",
+      "output/azure/intune.xml",
+      "output/azure/iot.xml",
+      "output/azure/management-and-governance.xml",
+      "output/azure/menu.xml",
+      "output/azure/migrate.xml",
+      "output/azure/migration.xml",
+      "output/azure/mixed-reality.xml",
+      "output/azure/mobile.xml",
+      "output/azure/monitor.xml",
+      "output/azure/networking.xml",
+      "output/azure/new-icons.xml",
+      "output/azure/other.xml",
+      "output/azure/security.xml",
+      "output/azure/storage.xml",
+      "output/azure/web.xml"
+    ],
+    "total_icons": 705
+  }
+}
