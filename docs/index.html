@@ -1,540 +1,601 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagrams.net Icon Libraries</title>
-  <style>
-    :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --text: #c9d1d9;
-      --text-muted: #8b949e;
-      --accent: #58a6ff;
-      --success: #3fb950;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 2rem;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
-    
-    .provider-section {
-      margin-bottom: 3rem;
-    }
-    
-    .provider-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .provider-header h2 {
-      font-size: 1.5rem;
-    }
-    
-    .badge {
-      background: var(--success);
-      color: #000;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .libraries-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1rem;
-    }
-    
-    .library-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-    }
-    
-    .library-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .icon-count {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: normal;
-    }
-    
-    .url-box {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    
-    .url-input {
-      flex: 1;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.5rem;
-      color: var(--text);
-      font-family: monospace;
-      font-size: 0.85rem;
-    }
-    
-    .copy-btn {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-weight: 600;
-      transition: opacity 0.2s;
-    }
-    
-    .copy-btn:hover {
-      opacity: 0.9;
-    }
-    
-    .copy-btn.copied {
-      background: var(--success);
-    }
-    
-    .snippet-section {
-      margin-top: 3rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-    
-    .snippet-section h2 {
-      margin-bottom: 1rem;
-    }
-    
-    .snippet-code {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1rem;
-      overflow-x: auto;
-      position: relative;
-    }
-    
-    .snippet-code pre {
-      margin: 0;
-      font-family: monospace;
-      font-size: 0.9rem;
-      white-space: pre-wrap;
-    }
-    
-    .snippet-copy-btn {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-    }
-    
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: var(--text-muted);
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    
-    footer a:hover {
-      text-decoration: underline;
-    }
-    
-    .loading {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-muted);
-    }
-    
-    /* Converter Section */
-    .converter-section {
-      margin-bottom: 3rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-    
-    .converter-section h2 {
-      margin-bottom: 0.5rem;
-    }
-    
-    .converter-description {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-    
-    .drop-zone {
-      border: 2px dashed var(--border);
-      border-radius: 8px;
-      padding: 3rem 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 1rem;
-    }
-    
-    .drop-zone:hover,
-    .drop-zone.dragover {
-      border-color: var(--accent);
-      background: rgba(88, 166, 255, 0.1);
-    }
-    
-    .drop-zone-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    
-    .drop-zone-text {
-      color: var(--text-muted);
-    }
-    
-    .drop-zone-text strong {
-      color: var(--accent);
-    }
-    
-    .file-input {
-      display: none;
-    }
-    
-    .converter-options {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    .converter-options label {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
-    .converter-options input {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.5rem;
-      color: var(--text);
-      margin-left: 0.5rem;
-      width: 200px;
-    }
-    
-    .file-list {
-      margin: 1rem 0;
-    }
-    
-    .file-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      background: var(--bg);
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
-    }
-    
-    .file-item-name {
-      flex: 1;
-      font-family: monospace;
-      font-size: 0.9rem;
-    }
-    
-    .file-item-remove {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-    }
-    
-    .file-item-remove:hover {
-      color: #f85149;
-    }
-    
-    .converter-results {
-      display: none;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-    
-    .converter-results.visible {
-      display: block;
-    }
-    
-    .result-buttons {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    
-    .result-btn {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      border-radius: 4px;
-      padding: 0.75rem 1.25rem;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: opacity 0.2s;
-    }
-    
-    .result-btn:hover {
-      opacity: 0.9;
-    }
-    
-    .result-btn.secondary {
-      background: var(--border);
-      color: var(--text);
-    }
-    
-    .result-btn.copied {
-      background: var(--success);
-    }
-    
-    .result-preview {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1rem;
-      max-height: 200px;
-      overflow: auto;
-    }
-    
-    .result-preview pre {
-      margin: 0;
-      font-family: monospace;
-      font-size: 0.85rem;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-    
-    .icons-preview {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      padding: 1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    
-    .icon-preview-item {
-      width: 48px;
-      height: 48px;
-      padding: 4px;
-      background: white;
-      border-radius: 4px;
-      cursor: help;
-    }
-    
-    .icon-preview-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>📐 Diagrams.net Icon Libraries</h1>
-      <p class="subtitle">最新のクラウドアイコンを Draw.io Integration で使う</p>
-    </header>
-    
-    <!-- SVG Converter Section -->
-    <div class="converter-section">
-      <h2>🔧 カスタム SVG コンバーター</h2>
-      <p class="converter-description">
-        独自のSVGアイコンをDraw.io用ライブラリに変換します。<br>
-        生成したXMLを自分のリポジトリにホスティングし、raw URLを使用してください。
-      </p>
-      
-      <div class="drop-zone" id="dropZone">
-        <div class="drop-zone-icon">📁</div>
-        <p class="drop-zone-text">
-          <strong>SVGファイルをドロップ</strong><br>
-          またはクリックして選択（複数可）
-        </p>
-        <input type="file" class="file-input" id="fileInput" accept=".svg" multiple>
-      </div>
-      
-      <div class="converter-options">
-        <label>
-          ライブラリ名:
-          <input type="text" id="libraryName" placeholder="My Custom Icons" value="My Custom Icons">
-        </label>
-      </div>
-      
-      <div class="file-list" id="fileList"></div>
-      
-      <div class="converter-results" id="converterResults">
-        <h3 style="margin-bottom: 1rem;">✨ 変換完了! (<span id="iconCount">0</span> アイコン)</h3>
-        
-        <div class="icons-preview" id="iconsPreview"></div>
-        
-        <div class="result-buttons" style="margin-top: 1rem;">
-          <button class="result-btn" onclick="downloadXml()">
-            📥 XMLダウンロード
-          </button>
-          <button class="result-btn secondary" onclick="clearFiles()">
-            🗑️ クリア
-          </button>
-        </div>
-        
-        <div class="usage-guide" style="margin-top: 1.5rem; padding: 1rem; background: var(--bg); border-radius: 4px; border: 1px solid var(--border);">
-          <h4 style="margin-bottom: 0.5rem;">📖 使い方</h4>
-          <ol style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
-            <li>XMLをダウンロードして、GitHubリポジトリにアップロード</li>
-            <li>raw URLを取得（例: <code>https://raw.githubusercontent.com/ユーザー名/リポジトリ/main/ファイル名.xml</code>）</li>
-            <li>VS Code の settings.json に以下を追加:</li>
-          </ol>
-          <pre style="margin-top: 0.5rem; padding: 0.75rem; background: var(--card-bg); border-radius: 4px; font-size: 0.85rem; overflow-x: auto;"><code id="usageSnippet"></code></pre>
-        </div>
-      </div>
-    </div>
-    
-    <div id="libraries">
-      <div class="loading">ライブラリ情報を読み込み中...</div>
-    </div>
-    
-    <div class="snippet-section">
-      <h2>📋 VS Code settings.json スニペット</h2>
-      <p style="color: var(--text-muted); margin-bottom: 1rem;">
-        以下をコピーして settings.json に追加してください。使いたいカテゴリのみ残すこともできます。
-      </p>
-      <div class="snippet-code">
-        <button class="copy-btn snippet-copy-btn" onclick="copySnippet()">Copy</button>
-        <pre id="settings-snippet">読み込み中...</pre>
-      </div>
-    </div>
-    
-    <footer>
-      <p>
-        <a href="https://github.com/ry0y4n/diagramnet-icon-libraries">GitHub</a> · 
-        毎週自動更新 · 
-        <a href="https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio">Draw.io Integration</a>
-      </p>
-    </footer>
-  </div>
-  
-  <script>
-    const BASE_RAW_URL = 'https://raw.githubusercontent.com/ry0y4n/diagramnet-icon-libraries/main/output';
-    
-    // ライブラリ定義（静的、index.jsonから動的に取得も可能）
-    const LIBRARIES = {
-      azure: {
-        name: 'Azure Architecture Icons',
-        categories: [
-          { name: 'AI + Machine Learning', file: 'ai-and-machine-learning.xml' },
-          { name: 'Analytics', file: 'analytics.xml' },
-          { name: 'App Services', file: 'app-services.xml' },
-          { name: 'Azure Ecosystem', file: 'azure-ecosystem.xml' },
-          { name: 'Azure Stack', file: 'azure-stack.xml' },
-          { name: 'Blockchain', file: 'blockchain.xml' },
-          { name: 'Compute', file: 'compute.xml' },
-          { name: 'Containers', file: 'containers.xml' },
-          { name: 'Databases', file: 'databases.xml' },
-          { name: 'DevOps', file: 'devops.xml' },
-          { name: 'General', file: 'general.xml' },
-          { name: 'Hybrid + Multicloud', file: 'hybrid-and-multicloud.xml' },
-          { name: 'Identity', file: 'identity.xml' },
-          { name: 'Integration', file: 'integration.xml' },
-          { name: 'Intune', file: 'intune.xml' },
-          { name: 'IoT', file: 'iot.xml' },
-          { name: 'Management + Governance', file: 'management-and-governance.xml' },
-          { name: 'Migrate', file: 'migrate.xml' },
-          { name: 'Mixed Reality', file: 'mixed-reality.xml' },
-          { name: 'Mobile', file: 'mobile.xml' },
-          { name: 'Monitor', file: 'monitor.xml' },
-          { name: 'Networking', file: 'networking.xml' },
-          { name: 'New Icons', file: 'new-icons.xml' },
-          { name: 'Other', file: 'other.xml' },
-          { name: 'Security', file: 'security.xml' },
-          { name: 'Storage', file: 'storage.xml' },
-          { name: 'Web', file: 'web.xml' },
-        ]
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrams.net Icon Libraries</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --card-bg: #161b22;
+        --border: #30363d;
+        --text: #c9d1d9;
+        --text-muted: #8b949e;
+        --accent: #58a6ff;
+        --success: #3fb950;
       }
-    };
-    
-    function getUrl(provider, file) {
-      return `${BASE_RAW_URL}/${provider}/${file}`;
-    }
-    
-    function copyToClipboard(text, btn) {
-      navigator.clipboard.writeText(text).then(() => {
-        const original = btn.textContent;
-        btn.textContent = '✓ Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.classList.remove('copied');
-        }, 2000);
-      });
-    }
-    
-    function renderLibraries() {
-      const container = document.getElementById('libraries');
-      let html = '';
-      
-      for (const [providerId, provider] of Object.entries(LIBRARIES)) {
-        html += `
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+          Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+      }
+
+      .provider-section {
+        margin-bottom: 3rem;
+      }
+
+      .provider-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .provider-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .badge {
+        background: var(--success);
+        color: #000;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .libraries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1rem;
+      }
+
+      .library-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+      }
+
+      .library-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .icon-count {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: normal;
+      }
+
+      .url-box {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .url-input {
+        flex: 1;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: var(--text);
+        font-family: monospace;
+        font-size: 0.85rem;
+      }
+
+      .copy-btn {
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: opacity 0.2s;
+      }
+
+      .copy-btn:hover {
+        opacity: 0.9;
+      }
+
+      .copy-btn.copied {
+        background: var(--success);
+      }
+
+      .snippet-section {
+        margin-top: 3rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+      }
+
+      .snippet-section h2 {
+        margin-bottom: 1rem;
+      }
+
+      .snippet-code {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        position: relative;
+      }
+
+      .snippet-code pre {
+        margin: 0;
+        font-family: monospace;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+      }
+
+      .snippet-copy-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+
+      footer {
+        margin-top: 3rem;
+        text-align: center;
+        color: var(--text-muted);
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-muted);
+      }
+
+      /* Converter Section */
+      .converter-section {
+        margin-bottom: 3rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+      }
+
+      .converter-section h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      .converter-description {
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+      }
+
+      .drop-zone {
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        padding: 3rem 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: 1rem;
+      }
+
+      .drop-zone:hover,
+      .drop-zone.dragover {
+        border-color: var(--accent);
+        background: rgba(88, 166, 255, 0.1);
+      }
+
+      .drop-zone-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .drop-zone-text {
+        color: var(--text-muted);
+      }
+
+      .drop-zone-text strong {
+        color: var(--accent);
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      .converter-options {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .converter-options label {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .converter-options input {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.5rem;
+        color: var(--text);
+        margin-left: 0.5rem;
+        width: 200px;
+      }
+
+      .file-list {
+        margin: 1rem 0;
+      }
+
+      .file-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background: var(--bg);
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+      }
+
+      .file-item-name {
+        flex: 1;
+        font-family: monospace;
+        font-size: 0.9rem;
+      }
+
+      .file-item-remove {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .file-item-remove:hover {
+        color: #f85149;
+      }
+
+      .converter-results {
+        display: none;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .converter-results.visible {
+        display: block;
+      }
+
+      .result-buttons {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .result-btn {
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: opacity 0.2s;
+      }
+
+      .result-btn:hover {
+        opacity: 0.9;
+      }
+
+      .result-btn.secondary {
+        background: var(--border);
+        color: var(--text);
+      }
+
+      .result-btn.copied {
+        background: var(--success);
+      }
+
+      .result-preview {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1rem;
+        max-height: 200px;
+        overflow: auto;
+      }
+
+      .result-preview pre {
+        margin: 0;
+        font-family: monospace;
+        font-size: 0.85rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .icons-preview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .icon-preview-item {
+        width: 48px;
+        height: 48px;
+        padding: 4px;
+        background: white;
+        border-radius: 4px;
+        cursor: help;
+      }
+
+      .icon-preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📐 Diagrams.net Icon Libraries</h1>
+        <p class="subtitle">
+          最新のクラウドアイコンを Draw.io Integration で使う
+        </p>
+      </header>
+
+      <!-- SVG Converter Section -->
+      <div class="converter-section">
+        <h2>🔧 カスタム SVG コンバーター</h2>
+        <p class="converter-description">
+          独自のSVGアイコンをDraw.io用ライブラリに変換します。<br />
+          生成したXMLを自分のリポジトリにホスティングし、raw
+          URLを使用してください。
+        </p>
+
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-zone-icon">📁</div>
+          <p class="drop-zone-text">
+            <strong>SVGファイルをドロップ</strong><br />
+            またはクリックして選択（複数可）
+          </p>
+          <input
+            type="file"
+            class="file-input"
+            id="fileInput"
+            accept=".svg"
+            multiple
+          />
+        </div>
+
+        <div class="converter-options">
+          <label>
+            ライブラリ名:
+            <input
+              type="text"
+              id="libraryName"
+              placeholder="My Custom Icons"
+              value="My Custom Icons"
+            />
+          </label>
+        </div>
+
+        <div class="file-list" id="fileList"></div>
+
+        <div class="converter-results" id="converterResults">
+          <h3 style="margin-bottom: 1rem">
+            ✨ 変換完了! (<span id="iconCount">0</span> アイコン)
+          </h3>
+
+          <div class="icons-preview" id="iconsPreview"></div>
+
+          <div class="result-buttons" style="margin-top: 1rem">
+            <button class="result-btn" onclick="downloadXml()">
+              📥 XMLダウンロード
+            </button>
+            <button class="result-btn secondary" onclick="clearFiles()">
+              🗑️ クリア
+            </button>
+          </div>
+
+          <div
+            class="usage-guide"
+            style="
+              margin-top: 1.5rem;
+              padding: 1rem;
+              background: var(--bg);
+              border-radius: 4px;
+              border: 1px solid var(--border);
+            "
+          >
+            <h4 style="margin-bottom: 0.5rem">📖 使い方</h4>
+            <ol
+              style="
+                margin-left: 1.5rem;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+              "
+            >
+              <li>XMLをダウンロードして、GitHubリポジトリにアップロード</li>
+              <li>
+                raw URLを取得（例:
+                <code
+                  >https://raw.githubusercontent.com/ユーザー名/リポジトリ/main/ファイル名.xml</code
+                >）
+              </li>
+              <li>VS Code の settings.json に以下を追加:</li>
+            </ol>
+            <pre
+              style="
+                margin-top: 0.5rem;
+                padding: 0.75rem;
+                background: var(--card-bg);
+                border-radius: 4px;
+                font-size: 0.85rem;
+                overflow-x: auto;
+              "
+            ><code id="usageSnippet"></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="libraries">
+        <div class="loading">ライブラリ情報を読み込み中...</div>
+      </div>
+
+      <div class="snippet-section">
+        <h2>📋 VS Code settings.json スニペット</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem">
+          以下をコピーして settings.json
+          に追加してください。使いたいカテゴリのみ残すこともできます。
+        </p>
+        <div class="snippet-code">
+          <button class="copy-btn snippet-copy-btn" onclick="copySnippet()">
+            Copy
+          </button>
+          <pre id="settings-snippet">読み込み中...</pre>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <a href="https://github.com/ry0y4n/diagramnet-icon-libraries"
+            >GitHub</a
+          >
+          · 毎週自動更新 ·
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio"
+            >Draw.io Integration</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      const BASE_RAW_URL =
+        "https://raw.githubusercontent.com/ry0y4n/diagramnet-icon-libraries/main/output";
+
+      // ライブラリ定義（静的、index.jsonから動的に取得も可能）
+      const LIBRARIES = {
+        azure: {
+          name: "Azure Architecture Icons",
+          categories: [
+            {
+              name: "AI + Machine Learning",
+              file: "ai-and-machine-learning.xml",
+            },
+            { name: "Analytics", file: "analytics.xml" },
+            { name: "App Services", file: "app-services.xml" },
+            { name: "Azure Ecosystem", file: "azure-ecosystem.xml" },
+            { name: "Azure Stack", file: "azure-stack.xml" },
+            { name: "Blockchain", file: "blockchain.xml" },
+            { name: "Compute", file: "compute.xml" },
+            { name: "Containers", file: "containers.xml" },
+            { name: "Databases", file: "databases.xml" },
+            { name: "DevOps", file: "devops.xml" },
+            { name: "General", file: "general.xml" },
+            { name: "Hybrid + Multicloud", file: "hybrid-and-multicloud.xml" },
+            { name: "Identity", file: "identity.xml" },
+            { name: "Integration", file: "integration.xml" },
+            { name: "Intune", file: "intune.xml" },
+            { name: "IoT", file: "iot.xml" },
+            {
+              name: "Management + Governance",
+              file: "management-and-governance.xml",
+            },
+            { name: "Migrate", file: "migrate.xml" },
+            { name: "Mixed Reality", file: "mixed-reality.xml" },
+            { name: "Mobile", file: "mobile.xml" },
+            { name: "Monitor", file: "monitor.xml" },
+            { name: "Networking", file: "networking.xml" },
+            { name: "New Icons", file: "new-icons.xml" },
+            { name: "Other", file: "other.xml" },
+            { name: "Security", file: "security.xml" },
+            { name: "Storage", file: "storage.xml" },
+            { name: "Web", file: "web.xml" },
+          ],
+        },
+      };
+
+      function getUrl(provider, file) {
+        return `${BASE_RAW_URL}/${provider}/${file}`;
+      }
+
+      function copyToClipboard(text, btn) {
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = "✓ Copied!";
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove("copied");
+          }, 2000);
+        });
+      }
+
+      function renderLibraries() {
+        const container = document.getElementById("libraries");
+        let html = "";
+
+        for (const [providerId, provider] of Object.entries(LIBRARIES)) {
+          html += `
           <div class="provider-section">
             <div class="provider-header">
               <h2>${provider.name}</h2>
@@ -542,10 +603,10 @@
             </div>
             <div class="libraries-grid">
         `;
-        
-        for (const cat of provider.categories) {
-          const url = getUrl(providerId, cat.file);
-          html += `
+
+          for (const cat of provider.categories) {
+            const url = getUrl(providerId, cat.file);
+            html += `
             <div class="library-card">
               <h3>${cat.name}</h3>
               <div class="url-box">
@@ -554,213 +615,225 @@
               </div>
             </div>
           `;
+          }
+
+          html += "</div></div>";
         }
-        
-        html += '</div></div>';
+
+        container.innerHTML = html;
       }
-      
-      container.innerHTML = html;
-    }
-    
-    function generateSettingsSnippet() {
-      const libraries = [];
-      
-      for (const [providerId, provider] of Object.entries(LIBRARIES)) {
-        for (const cat of provider.categories) {
-          libraries.push({
-            entryId: `${provider.name} - ${cat.name}`,
-            libName: `${providerId.charAt(0).toUpperCase() + providerId.slice(1)} - ${cat.name}`,
-            url: getUrl(providerId, cat.file)
-          });
+
+      function generateSettingsSnippet() {
+        const libraries = [];
+
+        for (const [providerId, provider] of Object.entries(LIBRARIES)) {
+          for (const cat of provider.categories) {
+            libraries.push({
+              entryId: `${provider.name} - ${cat.name}`,
+              libName: `${
+                providerId.charAt(0).toUpperCase() + providerId.slice(1)
+              } - ${cat.name}`,
+              url: getUrl(providerId, cat.file),
+            });
+          }
+        }
+
+        const snippet = {
+          "hediet.vscode-drawio.customLibraries": libraries,
+        };
+
+        return JSON.stringify(snippet, null, 2);
+      }
+
+      function copySnippet() {
+        const snippet = generateSettingsSnippet();
+        const btn = document.querySelector(".snippet-copy-btn");
+        copyToClipboard(snippet, btn);
+      }
+
+      // 初期化
+      document.addEventListener("DOMContentLoaded", () => {
+        renderLibraries();
+        document.getElementById("settings-snippet").textContent =
+          generateSettingsSnippet();
+        initConverter();
+      });
+
+      // ============================================
+      // SVG Converter Logic
+      // ============================================
+
+      let uploadedFiles = [];
+      let convertedLibrary = null;
+
+      function initConverter() {
+        const dropZone = document.getElementById("dropZone");
+        const fileInput = document.getElementById("fileInput");
+
+        // Click to select
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        // File input change
+        fileInput.addEventListener("change", (e) => {
+          handleFiles(Array.from(e.target.files));
+        });
+
+        // Drag and drop
+        dropZone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropZone.classList.add("dragover");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+          dropZone.classList.remove("dragover");
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          dropZone.classList.remove("dragover");
+          const files = Array.from(e.dataTransfer.files).filter((f) =>
+            f.name.endsWith(".svg")
+          );
+          handleFiles(files);
+        });
+      }
+
+      function handleFiles(files) {
+        for (const file of files) {
+          if (!uploadedFiles.find((f) => f.name === file.name)) {
+            uploadedFiles.push(file);
+          }
+        }
+        renderFileList();
+        if (uploadedFiles.length > 0) {
+          convertFiles();
         }
       }
-      
-      const snippet = {
-        "hediet.vscode-drawio.customLibraries": libraries
-      };
-      
-      return JSON.stringify(snippet, null, 2);
-    }
-    
-    function copySnippet() {
-      const snippet = generateSettingsSnippet();
-      const btn = document.querySelector('.snippet-copy-btn');
-      copyToClipboard(snippet, btn);
-    }
-    
-    // 初期化
-    document.addEventListener('DOMContentLoaded', () => {
-      renderLibraries();
-      document.getElementById('settings-snippet').textContent = generateSettingsSnippet();
-      initConverter();
-    });
-    
-    // ============================================
-    // SVG Converter Logic
-    // ============================================
-    
-    let uploadedFiles = [];
-    let convertedLibrary = null;
-    
-    function initConverter() {
-      const dropZone = document.getElementById('dropZone');
-      const fileInput = document.getElementById('fileInput');
-      
-      // Click to select
-      dropZone.addEventListener('click', () => fileInput.click());
-      
-      // File input change
-      fileInput.addEventListener('change', (e) => {
-        handleFiles(Array.from(e.target.files));
-      });
-      
-      // Drag and drop
-      dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-      });
-      
-      dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('dragover');
-      });
-      
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        const files = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.svg'));
-        handleFiles(files);
-      });
-    }
-    
-    function handleFiles(files) {
-      for (const file of files) {
-        if (!uploadedFiles.find(f => f.name === file.name)) {
-          uploadedFiles.push(file);
+
+      function renderFileList() {
+        const container = document.getElementById("fileList");
+        if (uploadedFiles.length === 0) {
+          container.innerHTML = "";
+          return;
         }
-      }
-      renderFileList();
-      if (uploadedFiles.length > 0) {
-        convertFiles();
-      }
-    }
-    
-    function renderFileList() {
-      const container = document.getElementById('fileList');
-      if (uploadedFiles.length === 0) {
-        container.innerHTML = '';
-        return;
-      }
-      
-      container.innerHTML = uploadedFiles.map((file, index) => `
+
+        container.innerHTML = uploadedFiles
+          .map(
+            (file, index) => `
         <div class="file-item">
           <span class="file-item-name">${file.name}</span>
           <button class="file-item-remove" onclick="removeFile(${index})">✕</button>
         </div>
-      `).join('');
-    }
-    
-    function removeFile(index) {
-      uploadedFiles.splice(index, 1);
-      renderFileList();
-      if (uploadedFiles.length > 0) {
-        convertFiles();
-      } else {
-        document.getElementById('converterResults').classList.remove('visible');
+      `
+          )
+          .join("");
       }
-    }
-    
-    async function convertFiles() {
-      const entries = [];
-      const previews = [];
-      
-      for (const file of uploadedFiles) {
-        try {
-          const svgContent = await file.text();
-          const entry = svgToLibraryEntry(svgContent, file.name);
-          entries.push(entry);
-          
-          // Create preview
-          const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-          previews.push(URL.createObjectURL(blob));
-        } catch (e) {
-          console.error(`Failed to convert ${file.name}:`, e);
+
+      function removeFile(index) {
+        uploadedFiles.splice(index, 1);
+        renderFileList();
+        if (uploadedFiles.length > 0) {
+          convertFiles();
+        } else {
+          document
+            .getElementById("converterResults")
+            .classList.remove("visible");
         }
       }
-      
-      if (entries.length === 0) return;
-      
-      // Generate library XML
-      const libraryXml = createLibraryXml(entries);
-      convertedLibrary = {
-        xml: libraryXml,
-        entries: entries,
-        previews: previews
-      };
-      
-      // Show results
-      showResults();
-    }
-    
-    function svgToLibraryEntry(svgContent, filename) {
-      // Get dimensions from SVG
-      const dimensions = getSvgDimensions(svgContent);
-      let { width, height } = dimensions;
-      
-      // Scale down if too large
-      const maxSize = 80;
-      if (width > maxSize || height > maxSize) {
-        const scale = maxSize / Math.max(width, height);
-        width = Math.round(width * scale);
-        height = Math.round(height * scale);
+
+      async function convertFiles() {
+        const entries = [];
+        const previews = [];
+
+        for (const file of uploadedFiles) {
+          try {
+            const svgContent = await file.text();
+            const entry = svgToLibraryEntry(svgContent, file.name);
+            entries.push(entry);
+
+            // Create preview
+            const blob = new Blob([svgContent], { type: "image/svg+xml" });
+            previews.push(URL.createObjectURL(blob));
+          } catch (e) {
+            console.error(`Failed to convert ${file.name}:`, e);
+          }
+        }
+
+        if (entries.length === 0) return;
+
+        // Generate library XML
+        const libraryXml = createLibraryXml(entries);
+        convertedLibrary = {
+          xml: libraryXml,
+          entries: entries,
+          previews: previews,
+        };
+
+        // Show results
+        showResults();
       }
-      
-      // Create mxGraph XML
-      const mxGraphXml = createMxGraphXml(svgContent, width, height);
-      
-      // Compress and encode
-      const encoded = compressAndEncode(mxGraphXml);
-      
-      // Generate title from filename
-      const title = filename.replace('.svg', '')
-        .replace(/[-_]/g, ' ')
-        .replace(/\b\w/g, c => c.toUpperCase());
-      
-      return {
-        xml: encoded,
-        w: width,
-        h: height,
-        title: title,
-        aspect: 'fixed'
-      };
-    }
-    
-    function getSvgDimensions(svgContent) {
-      try {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(svgContent, 'image/svg+xml');
-        const svg = doc.documentElement;
-        
-        let width = svg.getAttribute('width') || '48';
-        let height = svg.getAttribute('height') || '48';
-        
-        // Remove units
-        width = parseInt(width.replace(/[^0-9.]/g, '')) || 48;
-        height = parseInt(height.replace(/[^0-9.]/g, '')) || 48;
-        
-        return { width, height };
-      } catch {
-        return { width: 48, height: 48 };
+
+      function svgToLibraryEntry(svgContent, filename) {
+        // Get dimensions from SVG
+        const dimensions = getSvgDimensions(svgContent);
+        let { width, height } = dimensions;
+
+        // Scale down if too large
+        const maxSize = 80;
+        if (width > maxSize || height > maxSize) {
+          const scale = maxSize / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+
+        // Create mxGraph XML
+        const mxGraphXml = createMxGraphXml(svgContent, width, height);
+
+        // Compress and encode
+        const encoded = compressAndEncode(mxGraphXml);
+
+        // Generate title from filename
+        const title = filename
+          .replace(".svg", "")
+          .replace(/[-_]/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+
+        return {
+          xml: encoded,
+          w: width,
+          h: height,
+          title: title,
+          aspect: "fixed",
+        };
       }
-    }
-    
-    function createMxGraphXml(svgContent, width, height) {
-      // Base64 encode SVG
-      const svgBase64 = btoa(unescape(encodeURIComponent(svgContent)));
-      
-      // URL encode for draw.io format
-      const svgData = encodeURIComponent(svgBase64);
-      
-      return `<mxGraphModel>
+
+      function getSvgDimensions(svgContent) {
+        try {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(svgContent, "image/svg+xml");
+          const svg = doc.documentElement;
+
+          let width = svg.getAttribute("width") || "48";
+          let height = svg.getAttribute("height") || "48";
+
+          // Remove units
+          width = parseInt(width.replace(/[^0-9.]/g, "")) || 48;
+          height = parseInt(height.replace(/[^0-9.]/g, "")) || 48;
+
+          return { width, height };
+        } catch {
+          return { width: 48, height: 48 };
+        }
+      }
+
+      function createMxGraphXml(svgContent, width, height) {
+        // Base64 encode SVG
+        const svgBase64 = btoa(unescape(encodeURIComponent(svgContent)));
+
+        // URL encode for draw.io format
+        const svgData = encodeURIComponent(svgBase64);
+
+        return `<mxGraphModel>
   <root>
     <mxCell id="0"/>
     <mxCell id="1" parent="0"/>
@@ -769,90 +842,104 @@
     </mxCell>
   </root>
 </mxGraphModel>`;
-    }
-    
-    function compressAndEncode(xmlContent) {
-      // Use pako for deflate compression (loaded from CDN)
-      const compressed = pako.deflateRaw(new TextEncoder().encode(xmlContent), { level: 9 });
-      
-      // Base64 encode
-      let binary = '';
-      for (let i = 0; i < compressed.length; i++) {
-        binary += String.fromCharCode(compressed[i]);
       }
-      return btoa(binary);
-    }
-    
-    function createLibraryXml(entries) {
-      const json = JSON.stringify(entries);
-      return `<mxlibrary>${json}</mxlibrary>`;
-    }
-    
-    function showResults() {
-      const resultsDiv = document.getElementById('converterResults');
-      resultsDiv.classList.add('visible');
-      
-      // Update icon count
-      document.getElementById('iconCount').textContent = convertedLibrary.entries.length;
-      
-      // Show icon previews
-      const previewDiv = document.getElementById('iconsPreview');
-      previewDiv.innerHTML = convertedLibrary.previews.map((url, i) => 
-        `<div class="icon-preview-item" title="${convertedLibrary.entries[i].title}"><img src="${url}" alt="icon"></div>`
-      ).join('');
-      
-      // Update usage snippet
-      updateUsageSnippet();
-    }
-    
-    function updateUsageSnippet() {
-      const libraryName = document.getElementById('libraryName').value || 'My Custom Icons';
-      const snippet = `{
+
+      function compressAndEncode(xmlContent) {
+        // Use pako for deflate compression (loaded from CDN)
+        const compressed = pako.deflateRaw(
+          new TextEncoder().encode(xmlContent),
+          { level: 9 }
+        );
+
+        // Base64 encode
+        let binary = "";
+        for (let i = 0; i < compressed.length; i++) {
+          binary += String.fromCharCode(compressed[i]);
+        }
+        return btoa(binary);
+      }
+
+      function createLibraryXml(entries) {
+        const json = JSON.stringify(entries);
+        return `<mxlibrary>${json}</mxlibrary>`;
+      }
+
+      function showResults() {
+        const resultsDiv = document.getElementById("converterResults");
+        resultsDiv.classList.add("visible");
+
+        // Update icon count
+        document.getElementById("iconCount").textContent =
+          convertedLibrary.entries.length;
+
+        // Show icon previews
+        const previewDiv = document.getElementById("iconsPreview");
+        previewDiv.innerHTML = convertedLibrary.previews
+          .map(
+            (url, i) =>
+              `<div class="icon-preview-item" title="${convertedLibrary.entries[i].title}"><img src="${url}" alt="icon"></div>`
+          )
+          .join("");
+
+        // Update usage snippet
+        updateUsageSnippet();
+      }
+
+      function updateUsageSnippet() {
+        const libraryName =
+          document.getElementById("libraryName").value || "My Custom Icons";
+        const snippet = `{
   "hediet.vscode-drawio.customLibraries": [
     {
       "entryId": "${libraryName}",
       "libName": "${libraryName}",
-      "url": "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/${libraryName.toLowerCase().replace(/\s+/g, '-')}.xml"
+      "url": "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/${libraryName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}.xml"
     }
   ]
 }`;
-      document.getElementById('usageSnippet').textContent = snippet;
-    }
-    
-    function clearFiles() {
-      uploadedFiles = [];
-      convertedLibrary = null;
-      renderFileList();
-      document.getElementById('converterResults').classList.remove('visible');
-      document.getElementById('fileInput').value = '';
-    }
-    
-    function downloadXml() {
-      if (!convertedLibrary) return;
-      
-      const libraryName = document.getElementById('libraryName').value || 'custom-library';
-      const filename = libraryName.toLowerCase().replace(/\s+/g, '-') + '.xml';
-      
-      const blob = new Blob([convertedLibrary.xml], { type: 'application/xml' });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      
-      URL.revokeObjectURL(url);
-    }
-    
-    // Update snippet when library name changes
-    document.getElementById('libraryName')?.addEventListener('input', () => {
-      if (convertedLibrary) {
-        updateUsageSnippet();
+        document.getElementById("usageSnippet").textContent = snippet;
       }
-    });
-  </script>
-  
-  <!-- Pako library for deflate compression -->
-  <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
-</body>
+
+      function clearFiles() {
+        uploadedFiles = [];
+        convertedLibrary = null;
+        renderFileList();
+        document.getElementById("converterResults").classList.remove("visible");
+        document.getElementById("fileInput").value = "";
+      }
+
+      function downloadXml() {
+        if (!convertedLibrary) return;
+
+        const libraryName =
+          document.getElementById("libraryName").value || "custom-library";
+        const filename =
+          libraryName.toLowerCase().replace(/\s+/g, "-") + ".xml";
+
+        const blob = new Blob([convertedLibrary.xml], {
+          type: "application/xml",
+        });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+
+        URL.revokeObjectURL(url);
+      }
+
+      // Update snippet when library name changes
+      document.getElementById("libraryName")?.addEventListener("input", () => {
+        if (convertedLibrary) {
+          updateUsageSnippet();
+        }
+      });
+    </script>
+
+    <!-- Pako library for deflate compression -->
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+  </body>
 </html>
