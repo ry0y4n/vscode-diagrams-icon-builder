@@ -33,5 +33,22 @@
       "output/azure/web.xml"
     ],
     "total_icons": 705
+  },
+  "microsoft365": {
+    "name": "Microsoft 365 Architecture Icons",
+    "categories": [
+      "output/microsoft365/microsoft-blue--48x48-dark-blue-icon.xml",
+      "output/microsoft365/microsoft-blue--48x48-grey-and-blue-icon.xml",
+      "output/microsoft365/microsoft-blue--48x48-light-blue-icon.xml",
+      "output/microsoft365/microsoft-purple--48x48-svg-icons.xml",
+      "output/microsoft365/planner-green--48x48-svg-icons.xml",
+      "output/microsoft365/project-green--48x48-svg-icons.xml",
+      "output/microsoft365/sharepoint-teal--48x48-svg-icon.xml",
+      "output/microsoft365/teams-purple.xml",
+      "output/microsoft365/teams-purple--48x48-dark-purple-icon.xml",
+      "output/microsoft365/teams-purple--48x48-grey-and-purple-icon.xml",
+      "output/microsoft365/teams-purple--48x48-light-purple-icon.xml"
+    ],
+    "total_icons": 963
   }
 }

@@ -11,44 +11,40 @@ import shutil
 from pathlib import Path
 
 from src.fetchers.azure import AzureFetcher
+from src.fetchers.microsoft365 import Microsoft365Fetcher
 from src.converters.svg_to_drawio import (
     create_library_entry_from_file,
     create_library_xml,
 )
 
 
-def generate_azure_libraries(output_dir: Path, cache_dir: Path) -> dict:
-    """
-    Generate Draw.io libraries for all Azure icon categories.
-    
-    Args:
-        output_dir: Directory to save generated XML files
-        cache_dir: Directory for cached downloads
-        
-    Returns:
-        Dictionary with generation statistics
-    """
-    fetcher = AzureFetcher(cache_dir)
+def _safe_filename(name: str) -> str:
+    safe = name.lower().strip()
+    safe = safe.replace("&", "and").replace("+", "and")
+    safe = "-".join(safe.split())
+    safe = "".join(c for c in safe if c.isalnum() or c == "-")
+    return safe.strip("-") or "category"
+
+
+def generate_libraries(fetcher, output_dir: Path) -> dict:
+    """Generate Draw.io libraries for all categories of a fetcher."""
     fetcher.fetch()
-    
-    azure_output = output_dir / "azure"
-    azure_output.mkdir(parents=True, exist_ok=True)
-    
+
+    provider_output = output_dir / fetcher.name
+    provider_output.mkdir(parents=True, exist_ok=True)
+
     stats = {
         "categories": 0,
         "icons": 0,
         "files": [],
     }
-    
+
     print("\nGenerating libraries...")
-    
+
     for category in fetcher.get_categories():
-        # Create safe filename
-        safe_name = category.name.lower().replace(' ', '-').replace('+', 'and')
-        safe_name = ''.join(c for c in safe_name if c.isalnum() or c == '-')
-        output_path = azure_output / f"{safe_name}.xml"
-        
-        # Convert all SVGs in category
+        safe_name = _safe_filename(category.name)
+        output_path = provider_output / f"{safe_name}.xml"
+
         entries = []
         for svg_file in category.svg_files:
             try:
@@ -56,35 +52,26 @@ def generate_azure_libraries(output_dir: Path, cache_dir: Path) -> dict:
                 entries.append(entry)
             except Exception as e:
                 print(f"    ✗ {svg_file.name}: {e}")
-        
+
         if entries:
-            # Generate library XML
             library_xml = create_library_xml(entries)
-            output_path.write_text(library_xml, encoding='utf-8')
-            
+            output_path.write_text(library_xml, encoding="utf-8")
+
             stats["categories"] += 1
             stats["icons"] += len(entries)
             stats["files"].append(str(output_path.relative_to(output_dir.parent)))
-            
+
             print(f"  ✓ {category.name}: {len(entries)} icons → {output_path.name}")
-    
+
     return stats
 
 
-def generate_index_json(output_dir: Path, stats: dict) -> None:
+def generate_index_json(output_dir: Path, providers: dict) -> None:
     """Generate an index.json file listing all available libraries."""
     import json
-    
-    index = {
-        "azure": {
-            "name": "Azure Architecture Icons",
-            "categories": stats["files"],
-            "total_icons": stats["icons"],
-        }
-    }
-    
+
     index_path = output_dir / "index.json"
-    index_path.write_text(json.dumps(index, indent=2), encoding='utf-8')
+    index_path.write_text(json.dumps(providers, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\n  Generated index: {index_path}")
 
 
@@ -115,17 +102,38 @@ def main():
     print("=" * 60)
     print("Draw.io Icon Library Generator")
     print("=" * 60)
-    
+
+    providers_index: dict[str, dict] = {}
+
     # Generate Azure libraries
-    stats = generate_azure_libraries(args.output, args.cache)
-    
+    azure_stats = generate_libraries(
+        AzureFetcher(args.cache / "azure"),
+        args.output,
+    )
+    providers_index["azure"] = {
+        "name": "Azure Architecture Icons",
+        "categories": azure_stats["files"],
+        "total_icons": azure_stats["icons"],
+    }
+
+    # Generate Microsoft 365 libraries
+    m365_stats = generate_libraries(
+        Microsoft365Fetcher(args.cache / "microsoft365"),
+        args.output,
+    )
+    providers_index["microsoft365"] = {
+        "name": "Microsoft 365 Architecture Icons",
+        "categories": m365_stats["files"],
+        "total_icons": m365_stats["icons"],
+    }
+
     # Generate index
-    generate_index_json(args.output, stats)
-    
+    generate_index_json(args.output, providers_index)
+
     print("\n" + "=" * 60)
-    print(f"Summary:")
-    print(f"  Categories: {stats['categories']}")
-    print(f"  Total icons: {stats['icons']}")
+    print("Summary:")
+    for provider_id, meta in providers_index.items():
+        print(f"  {provider_id}: {meta['total_icons']} icons, {len(meta['categories'])} categories")
     print(f"  Output: {args.output.absolute()}")
     print("=" * 60)
     
