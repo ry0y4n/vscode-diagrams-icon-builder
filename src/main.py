@@ -12,6 +12,7 @@ from pathlib import Path
 
 from src.fetchers.azure import AzureFetcher
 from src.fetchers.dynamics365 import Dynamics365Fetcher
+from src.fetchers.fabric import FabricFetcher
 from src.fetchers.microsoft365 import Microsoft365Fetcher
 from src.converters.svg_to_drawio import (
     create_library_entry_from_file,
@@ -137,6 +138,17 @@ def main():
         "name": "Microsoft Dynamics 365 Icons",
         "categories": dynamics365_stats["files"],
         "total_icons": dynamics365_stats["icons"],
+    }
+
+    # Generate Fabric libraries
+    fabric_stats = generate_libraries(
+        FabricFetcher(args.cache / "fabric"),
+        args.output,
+    )
+    providers_index["fabric"] = {
+        "name": "Microsoft Fabric Icons",
+        "categories": fabric_stats["files"],
+        "total_icons": fabric_stats["icons"],
     }
 
     # Generate index

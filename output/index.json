@@ -59,5 +59,12 @@
       "output/dynamics365/dynamics-365-product-family-icons.xml"
     ],
     "total_icons": 29
+  },
+  "fabric": {
+    "name": "Microsoft Fabric Icons",
+    "categories": [
+      "output/fabric/fabric-icons.xml"
+    ],
+    "total_icons": 1505
   }
 }
