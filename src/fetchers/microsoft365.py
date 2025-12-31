@@ -193,7 +193,7 @@ class Microsoft365Fetcher(BaseFetcher):
         svg_dirs: set[Path] = set()
 
         # Include any directory that has SVGs directly within it.
-        for svg_file in self._icons_dir.rglob("*.svg"):
+        for svg_file in sorted(self._icons_dir.rglob("*.svg")):
             svg_dirs.add(svg_file.parent)
 
         return sorted(svg_dirs, key=lambda p: str(p))

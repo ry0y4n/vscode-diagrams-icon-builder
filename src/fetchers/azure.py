@@ -142,7 +142,7 @@ class AzureFetcher(BaseFetcher):
                 continue
             
             # Find all SVG files (may be in subdirectories)
-            svg_files = list(category_dir.rglob('*.svg'))
+            svg_files = sorted(category_dir.rglob('*.svg'))
             
             if svg_files:
                 # Clean up category name

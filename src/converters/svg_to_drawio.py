@@ -164,7 +164,7 @@ def create_library_xml(entries: list[dict]) -> str:
         Complete library XML string
     """
     # JSON array format (draw.io format)
-    json_content = json.dumps(entries, ensure_ascii=False, separators=(',', ':'))
+    json_content = json.dumps(entries, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
 
     # Wrap in mxlibrary format
     library_xml = f'<mxlibrary>{json_content}</mxlibrary>'

@@ -125,37 +125,41 @@ class FabricFetcher(BaseFetcher):
             raise RuntimeError("Must call fetch() first")
 
         # Look for SVG files recursively
-        svg_files = list(self._icons_dir.rglob('*.svg'))
+        svg_files = sorted(self._icons_dir.rglob('*.svg'))
         if not svg_files:
             raise RuntimeError(f"No SVG files found in {self._icons_dir}")
 
-        # Find the common parent directory
-        # Fabric icons might be in a flat or hierarchical structure
-        possible_roots = set()
-        for svg_file in svg_files[:10]:  # Check first 10 files
-            possible_roots.add(svg_file.parent)
-
-        # If all SVGs are in the same directory, that's the root
-        if len(possible_roots) == 1:
-            return possible_roots.pop()
-
-        # Otherwise, find the shallowest common ancestor
-        common_depth = min(len(p.relative_to(self._icons_dir).parts) for p in possible_roots)
-        for depth in range(common_depth + 1):
-            candidates = set()
-            for svg_file in svg_files:
-                rel_path = svg_file.relative_to(self._icons_dir)
-                if len(rel_path.parts) > depth:
-                    candidates.add(self._icons_dir / Path(*rel_path.parts[:depth]))
-                else:
-                    candidates.add(svg_file.parent)
+        # Collect all immediate parent directories of SVG files
+        svg_parents = set(svg_file.parent for svg_file in svg_files)
+        
+        # If all SVGs are in the same directory with no subdirectories
+        if len(svg_parents) == 1:
+            return svg_parents.pop()
+        
+        # Find the common ancestor that contains multiple category directories
+        # Group by depth from icons_dir
+        depth_to_dirs: dict[int, set[Path]] = {}
+        for svg_parent in svg_parents:
+            rel_path = svg_parent.relative_to(self._icons_dir)
+            depth = len(rel_path.parts)
             
-            if len(candidates) > 1:
-                # Multiple categories at this level - this is likely the root
+            # Get the directory at each depth level
+            for d in range(depth):
+                ancestor = self._icons_dir / Path(*rel_path.parts[:d+1])
+                depth_to_dirs.setdefault(d, set()).add(ancestor)
+        
+        # Find the shallowest depth with multiple directories (categories)
+        for depth in sorted(depth_to_dirs.keys()):
+            dirs_at_depth = depth_to_dirs[depth]
+            if len(dirs_at_depth) > 1:
+                # Found multiple categories - return their parent
                 if depth == 0:
                     return self._icons_dir
-                return self._icons_dir / Path(*list(candidates)[0].relative_to(self._icons_dir).parts[:depth-1])
-
+                # Return the parent of these directories
+                first_dir = list(dirs_at_depth)[0]
+                return first_dir.parent
+        
+        # Fallback
         return self._icons_dir
 
     def get_categories(self) -> Generator[IconCategory, None, None]:
@@ -167,7 +171,7 @@ class FabricFetcher(BaseFetcher):
         print(f"  SVG root: {svg_root}")
 
         # Check if all SVGs are in a flat structure (no subdirectories)
-        direct_svgs = list(svg_root.glob('*.svg'))
+        direct_svgs = sorted(svg_root.glob('*.svg'))
         subdirs = [d for d in svg_root.iterdir() if d.is_dir()]
 
         if direct_svgs and not subdirs:
@@ -180,7 +184,7 @@ class FabricFetcher(BaseFetcher):
                     continue
 
                 # Find all SVG files (may be in subdirectories)
-                svg_files = list(category_dir.rglob('*.svg'))
+                svg_files = sorted(category_dir.rglob('*.svg'))
 
                 if svg_files:
                     # Clean up category name
