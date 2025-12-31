@@ -33,7 +33,7 @@
 
 3. Draw.io エディタを開くと、左側のパネルに新しいライブラリが表示されます！
 
-> 💡 **全カテゴリのスニペット**: [ポータルサイト](https://ry0y4n.github.io/diagramnet-icon-libraries/) でコピー可能なsettings.jsonスニペットを取得できます。
+> 💡 **全カテゴリのスニペット**: [ポータルサイト](https://ry0y4n.github.io/diagramnet-icon-libraries/) でコピー可能な settings.json スニペットを取得できます。
 
 ## 📦 利用可能なライブラリ
 
@@ -58,6 +58,22 @@
 | Web                     | `azure/web.xml`                       |
 | その他                  | [全カテゴリ一覧](output/azure/)       |
 
+### Microsoft 365 Architecture Icons
+
+| カテゴリ         | URL                                                         |
+| ---------------- | ----------------------------------------------------------- |
+| Microsoft Blue   | `microsoft365/microsoft-blue--48x48-dark-blue-icon.xml`     |
+| Microsoft Blue   | `microsoft365/microsoft-blue--48x48-grey-and-blue-icon.xml` |
+| Microsoft Blue   | `microsoft365/microsoft-blue--48x48-light-blue-icon.xml`    |
+| Microsoft Purple | `microsoft365/microsoft-purple--48x48-svg-icons.xml`        |
+| Planner Green    | `microsoft365/planner-green--48x48-svg-icons.xml`           |
+| Project Green    | `microsoft365/project-green--48x48-svg-icons.xml`           |
+| SharePoint Teal  | `microsoft365/sharepoint-teal--48x48-svg-icon.xml`          |
+| Teams Purple     | `microsoft365/teams-purple.xml`                             |
+| Teams Purple     | `microsoft365/teams-purple--48x48-dark-purple-icon.xml`     |
+| Teams Purple     | `microsoft365/teams-purple--48x48-grey-and-purple-icon.xml` |
+| Teams Purple     | `microsoft365/teams-purple--48x48-light-purple-icon.xml`    |
+
 > 💡 ベース URL: `https://raw.githubusercontent.com/ry0y4n/diagramnet-icon-libraries/main/output/`
 >
 > 📋 全カテゴリのコピペ用スニペットは [ポータルサイト](https://ry0y4n.github.io/diagramnet-icon-libraries/) で取得できます。
@@ -65,7 +81,9 @@
 ## 🔄 更新スケジュール
 
 - **Azure**: 毎週日曜日 00:00 UTC に自動更新
-- アイコンは [Microsoft 公式サイト](https://learn.microsoft.com/azure/architecture/icons/) から取得
+  - アイコンは [Microsoft 公式サイト](https://learn.microsoft.com/azure/architecture/icons/) から取得
+- **Microsoft 365**: 毎週日曜日 00:00 UTC に自動更新
+  - アイコンは [Microsoft Architecture Icons (GitHub)](https://github.com/microsoft/Microsoft-365-Architecture-Icons) から取得
 
 ## 🛠️ ローカルで実行
 
@@ -109,6 +127,7 @@ diagramnet-icon-libraries/
 ## 🗺️ ロードマップ
 
 - [x] Azure Architecture Icons
+- [x] Microsoft 365 Architecture Icons
 - [ ] AWS Architecture Icons
 - [ ] Google Cloud Icons
 - [ ] Material Design Icons
@@ -120,6 +139,7 @@ diagramnet-icon-libraries/
 **注意**: 各アイコンセットは元のライセンスに従います：
 
 - Azure Icons: [Microsoft 利用規約](https://learn.microsoft.com/azure/architecture/icons/)
+- Microsoft 365 Icons: [Microsoft 利用規約](https://github.com/microsoft/Microsoft-365-Architecture-Icons)
 - AWS Icons: AWS 利用規約
 - GCP Icons: Google Cloud 利用規約
 
