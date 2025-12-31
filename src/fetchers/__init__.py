@@ -3,6 +3,7 @@
 from .azure import AzureFetcher
 from .base import BaseFetcher, IconCategory
 from .dynamics365 import Dynamics365Fetcher
+from .entra import EntraFetcher
 from .fabric import FabricFetcher
 from .microsoft365 import Microsoft365Fetcher
 
@@ -12,5 +13,6 @@ __all__ = [
     "AzureFetcher",
     "Microsoft365Fetcher",
     "Dynamics365Fetcher",
+    "EntraFetcher",
     "FabricFetcher",
 ]

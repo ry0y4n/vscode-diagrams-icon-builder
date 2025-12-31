@@ -12,6 +12,7 @@ from pathlib import Path
 
 from src.fetchers.azure import AzureFetcher
 from src.fetchers.dynamics365 import Dynamics365Fetcher
+from src.fetchers.entra import EntraFetcher
 from src.fetchers.fabric import FabricFetcher
 from src.fetchers.microsoft365 import Microsoft365Fetcher
 from src.converters.svg_to_drawio import (
@@ -149,6 +150,17 @@ def main():
         "name": "Microsoft Fabric Icons",
         "categories": fabric_stats["files"],
         "total_icons": fabric_stats["icons"],
+    }
+
+    # Generate Entra libraries
+    entra_stats = generate_libraries(
+        EntraFetcher(args.cache / "entra"),
+        args.output,
+    )
+    providers_index["entra"] = {
+        "name": "Microsoft Entra Architecture Icons",
+        "categories": entra_stats["files"],
+        "total_icons": entra_stats["icons"],
     }
 
     # Generate index

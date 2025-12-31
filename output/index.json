@@ -66,5 +66,13 @@
       "output/fabric/fabric-icons.xml"
     ],
     "total_icons": 1505
+  },
+  "entra": {
+    "name": "Microsoft Entra Architecture Icons",
+    "categories": [
+      "output/entra/microsoft-entra-bw-icons-svg.xml",
+      "output/entra/microsoft-entra-color-icons-svg.xml"
+    ],
+    "total_icons": 14
   }
 }
