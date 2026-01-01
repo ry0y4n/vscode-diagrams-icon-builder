@@ -8,6 +8,8 @@ Convert your SVG icons into custom libraries for [Draw.io Integration](https://m
 
 > 💡 **Live Example**: 3200+ icons from Azure, Microsoft 365, Dynamics 365, Fabric, and Entra (auto-updated weekly)
 
+![Portal Overview](docs/images/converter.png)
+
 ## ✨ Features
 
 - 🌐 **Browser Conversion**: Instant conversion with online tool
@@ -19,7 +21,10 @@ Convert your SVG icons into custom libraries for [Draw.io Integration](https://m
 
 ### Option 1: Use Online Converter (Recommended)
 
-1. Visit **[Online Tool](https://ry0y4n.github.io/diagramnet-icon-libraries/)**
+![Online Converter](docs/images/converter-demo.gif)
+_Drag & drop your SVG files and get Draw.io libraries instantly_
+
+1. Visit **[Online Converter](https://ry0y4n.github.io/diagramnet-icon-libraries/)**
 2. Drag & drop your SVG files
 3. Download the XML
 4. Add to your VS Code `settings.json`:
@@ -76,11 +81,14 @@ Directly use pre-generated libraries. For example, to add Azure Compute and Netw
 }
 ```
 
-> 📋 **All Categories**: Get snippets for all 46 categories at [Portal Site](https://ry0y4n.github.io/diagramnet-icon-libraries/)
+> 📋 **All Categories**: Get snippets for all 46 categories at [Library Portal](https://ry0y4n.github.io/diagramnet-icon-libraries/)
 
 ## 📦 Pre-built Libraries (3200+ Icons)
 
 Ready-to-use libraries with weekly auto-updates:
+
+![Library Portal](docs/images/prebuilt-icons.png)
+_Browse all categories and copy URLs instantly_
 
 | Provider                     | Icons | Categories | Main Categories                                    |
 | ---------------------------- | ----- | ---------- | -------------------------------------------------- |
@@ -90,7 +98,7 @@ Ready-to-use libraries with weekly auto-updates:
 | **Dynamics 365**             | 29    | 3          | Apps, Mixed Reality, Product Family                |
 | **Microsoft Entra**          | 14    | 2          | Identity & Access Management                       |
 
-> 📋 **Full List**: Browse and copy all categories at [Portal Site](https://ry0y4n.github.io/diagramnet-icon-libraries/)
+> 📋 **Full List**: Browse and copy all categories at [Library Portal](https://ry0y4n.github.io/diagramnet-icon-libraries/)
 
 ## 🛠️ Create Custom Libraries
 
