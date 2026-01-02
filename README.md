@@ -87,7 +87,7 @@ Directly use pre-generated libraries. For example, to add Azure Compute and Netw
 
 Ready-to-use libraries with weekly auto-updates:
 
-![Library Portal](docs/images/prebuilt-icons.png)
+![Library Portal](docs/images/prebuilt-custom-icon-demo.gif)
 _Browse all categories and copy URLs instantly_
 
 | Provider                     | Icons | Categories | Main Categories                                    |
