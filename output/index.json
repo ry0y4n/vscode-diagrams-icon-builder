@@ -55,10 +55,9 @@
     "name": "Microsoft Dynamics 365 Icons",
     "categories": [
       "output/dynamics365/dynamics-365-app-icons.xml",
-      "output/dynamics365/dynamics-365-mixed-reality-icons.xml",
       "output/dynamics365/dynamics-365-product-family-icons.xml"
     ],
-    "total_icons": 29
+    "total_icons": 15
   },
   "fabric": {
     "name": "Microsoft Fabric Icons",
